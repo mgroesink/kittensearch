@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +18,15 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 
     private Context mContext;
     private ArrayList<ExampleItem> mExampleList;
+    public OnItemClickListener mListener;
 
+    public interface OnItemClickListener{
+        public void OnItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
     public ExampleAdapter(Context context, ArrayList<ExampleItem> exampleItems) {
         this.mContext = context;
         this.mExampleList = exampleItems;
@@ -36,6 +45,17 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
             mTextViewCreator = (TextView)itemView.findViewById(R.id.text_view_creator);
             mTextViewLikes = (TextView)itemView.findViewById(R.id.text_view_likes);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(mListener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            mListener.OnItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -52,6 +72,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         holder.mTextViewCreator.setText(item.getmCreator());
         Picasso.with(mContext).load(item.getmImageUrl()).fit()
                 .centerInside().into(holder.mImageView);
+
     }
 
     @Override
