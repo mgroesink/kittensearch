@@ -1,12 +1,11 @@
 package nl.rocvantwente.rsk01.kittensearch;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -40,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mSearch = (EditText) findViewById(R.id.editTextSearch);
-        mSearchButton = (ImageButton) findViewById(R.id.imageSearchButton);
+        mSearch = findViewById(R.id.editTextSearch);
+        mSearchButton = findViewById(R.id.imageSearchButton);
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
         mSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Remove the previous search
                 ((EditText)view).setText("");
             }
         });

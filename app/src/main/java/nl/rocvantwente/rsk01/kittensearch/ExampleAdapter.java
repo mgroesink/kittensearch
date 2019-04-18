@@ -5,14 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder> {
 
@@ -21,7 +19,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     public OnItemClickListener mListener;
 
     public interface OnItemClickListener{
-        public void OnItemClick(int position);
+        void OnItemClick(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener){
@@ -41,9 +39,9 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         public ExampleViewHolder(View itemView) {
             super(itemView);
 
-            mImageView = (ImageView)itemView.findViewById(R.id.image_view);
-            mTextViewCreator = (TextView)itemView.findViewById(R.id.text_view_creator);
-            mTextViewLikes = (TextView)itemView.findViewById(R.id.text_view_likes);
+            mImageView = itemView.findViewById(R.id.image_view);
+            mTextViewCreator = itemView.findViewById(R.id.text_view_creator);
+            mTextViewLikes = itemView.findViewById(R.id.text_view_likes);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -72,7 +70,6 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         holder.mTextViewCreator.setText(item.getmCreator());
         Picasso.with(mContext).load(item.getmImageUrl()).fit()
                 .centerInside().into(holder.mImageView);
-
     }
 
     @Override
